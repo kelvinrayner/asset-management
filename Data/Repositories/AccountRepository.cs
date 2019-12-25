@@ -26,7 +26,7 @@ namespace Data.Repositories
 
         public IEnumerable<Account> Get()
         {
-            var account = _myContext.Accounts.Include("User").ToList();
+            var account = _myContext.Accounts.Include(a => a.Employee).Include(a => a.Role).ToList();
             return account;
         }
 
@@ -35,11 +35,20 @@ namespace Data.Repositories
             throw new NotImplementedException();
         }
 
-        public Account GetAccount(string username, string password)
+        public Account GetAccount(string email, string password)
         {
             //var account = _myContext.Accounts.Include("User").Where(a => a.Username == username && a.Password == password).SingleOrDefault();
-            var account = _myContext.Accounts.FromSql($"call SP_Retrieve_User({username},{password})").SingleOrDefault();
-            return account;
+            var account = _myContext.Accounts.FromSql($"call sp_retrieve_employee({email},{password})").SingleOrDefault();
+            if (account.Id != 0)
+            {
+                int accountId = Convert.ToInt32(account.Id);
+                var accountData = _myContext.Accounts.Include("Employee").Include("Role").Where(a => a.Id == accountId).SingleOrDefault();
+                return accountData;
+            }
+            else
+            {
+                return account;
+            }
         }
 
         public int Update(int id, AccountVM accountVM)

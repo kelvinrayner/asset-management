@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Data.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class EmployeeRepository : IUserRepository
     {
-        public int Create(UserVM userVM)
+        public int Create(EmployeeVM userVM)
         {
             throw new NotImplementedException();
         }
@@ -19,17 +19,17 @@ namespace Data.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<User> Get()
+        public IEnumerable<Employee> Get()
         {
             throw new NotImplementedException();
         }
 
-        public User Get(int id)
+        public Employee Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public int Update(int id, UserVM userVM)
+        public int Update(int id, EmployeeVM userVM)
         {
             throw new NotImplementedException();
         }

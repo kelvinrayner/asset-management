@@ -8,10 +8,10 @@ namespace Data.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        IEnumerable<User> Get();
-        User Get(int id);
-        int Create(UserVM userVM);
-        int Update(int id, UserVM userVM);
+        IEnumerable<Employee> Get();
+        Employee Get(int id);
+        int Create(EmployeeVM userVM);
+        int Update(int id, EmployeeVM userVM);
         int Delete(int id);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Data.Models;
+using Data.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -12,8 +13,12 @@ namespace Data.Context
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<AccountRole> AccountRoles { get; set; }
+        public DbSet<EmployeeDetails> EmployeeDetails { get; set; }
+        public DbSet<EmployeeDepartment> EmployeeDepartments { get; set; }
+        public DbSet<EmployeePosition> EmployeePositions { get; set; }
         
         public MyContext() { }
 

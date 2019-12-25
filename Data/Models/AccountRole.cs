@@ -8,30 +8,29 @@ using System.Text;
 
 namespace Data.Models
 {
-    [Table("TB_M_User")]
-    public class User : BaseModel
+    [Table("TB_M_Account_Role")]
+    public class AccountRole : BaseModel
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
+        public String Name { get; set; }
 
-        public User()
+        public AccountRole()
         {
         }
 
-        public User(UserVM userVM)
+        public AccountRole(RoleVM roleVM)
         {
-            Name = userVM.Name;
-            Email = userVM.Email;
+            Id = roleVM.Id;
+            Name = roleVM.Name;
             Create_Date = DateTime.Now;
             Is_Deleted = false;
-        }   
+        }
 
-        public void Update(UserVM userVM)
+        public void Update(RoleVM roleVM)
         {
-            Name = userVM.Name;
-            Email = userVM.Email;
+            Id = roleVM.Id;
+            Name = roleVM.Name;
             Update_Date = DateTime.Now;
         }
 

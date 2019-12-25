@@ -13,15 +13,15 @@ namespace Client.Controllers
         public ActionResult Index()
         {
             var a = HttpContext.Session.GetInt32("id");
-            var b = HttpContext.Session.GetString("username");
-            var c = HttpContext.Session.GetInt32("user_id");
-            if (a != null && b != null && c != null)
+            var b = HttpContext.Session.GetString("email");
+            //var c = HttpContext.Session.GetInt32("employee_id");
+            if (a != null && b != null/* && c != null*/)
             {
                 return View();
             }
             else
             {
-                return RedirectToAction("Login", "Index");
+                return RedirectToAction("Index", "Login");
             }
         }
 

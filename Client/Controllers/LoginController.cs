@@ -16,9 +16,9 @@ namespace Client.Controllers
         public ActionResult Index()
         {
             var a = HttpContext.Session.GetInt32("id");
-            var b = HttpContext.Session.GetString("username");
-            var c = HttpContext.Session.GetInt32("user_id");
-            if (a != null && b != null && c != null)
+            var b = HttpContext.Session.GetString("email");
+            //var c = HttpContext.Session.GetInt32("user_id");
+            if (a != null && b != null /*&& c != null*/)
             {
                 return RedirectToAction("Index", "Dashboard");
             }
@@ -116,14 +116,24 @@ namespace Client.Controllers
                 readTask.Wait();
                 accountVM = readTask.Result;
                 HttpContext.Session.SetInt32("id", accountVM.Id);
-                HttpContext.Session.SetString("username", accountVM.Username);
-                HttpContext.Session.SetInt32("user_id", accountVM.User_Id);
+                HttpContext.Session.SetString("email", accountVM.Email);
+                HttpContext.Session.SetInt32("employee_id", accountVM.Employee_Id);
                 return RedirectToAction("Index", "Dashboard");
             }
             else
             {
                 return RedirectToAction("Index", "Login");
             }
+        }
+        
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("id");
+            HttpContext.Session.Remove("email");
+            //HttpContext.Session.Remove("employee_id");
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Login");
         }
     }
 }
