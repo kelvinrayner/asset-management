@@ -105,19 +105,20 @@ namespace Client.Controllers
 
         public IActionResult Validate(string username, string password)
         {
-            AccountVM accountVM = null;
+            Account account = null;
             var client = new HttpClient();
             var responseTask = client.GetAsync("https://localhost:44398/api/accounts/" + username + "/" + password);
             responseTask.Wait();
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<AccountVM>();
+                var readTask = result.Content.ReadAsAsync<Account>();
                 readTask.Wait();
-                accountVM = readTask.Result;
-                HttpContext.Session.SetInt32("id", accountVM.Id);
-                HttpContext.Session.SetString("email", accountVM.Email);
-                HttpContext.Session.SetInt32("employee_id", accountVM.Employee_Id);
+                account = readTask.Result;
+                HttpContext.Session.SetInt32("id", account.Id);
+                HttpContext.Session.SetString("email", account.Email);
+                HttpContext.Session.SetInt32("employee_id", account.Employee.Id);
+                HttpContext.Session.SetInt32("role_id", account.Role.Id);
                 return RedirectToAction("Index", "Dashboard");
             }
             else
@@ -130,7 +131,8 @@ namespace Client.Controllers
         {
             HttpContext.Session.Remove("id");
             HttpContext.Session.Remove("email");
-            //HttpContext.Session.Remove("employee_id");
+            HttpContext.Session.Remove("employee_id");
+            HttpContext.Session.Remove("role_id");
             HttpContext.Session.Clear();
 
             return RedirectToAction("Index", "Login");

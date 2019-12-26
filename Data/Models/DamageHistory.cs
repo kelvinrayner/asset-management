@@ -7,11 +7,12 @@ using System.Text;
 
 namespace Data.Models
 {
-    [Table("TB_T_Damage_Asset")]
-    public class DamageAsset : BaseModel
+    [Table("TB_T_Damage_History")]
+    public class DamageHistory : BaseModel
     {
         [Key]
         public int Id { get; set; }
-        public AssetLend AssetLend { get; set; }
+        public DamageAsset DamageAsset { get; set; }
+        public DamageClassification DamageClassification { get; set; }
     }
 }

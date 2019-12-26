@@ -14,8 +14,9 @@ namespace Client.Controllers
         {
             var a = HttpContext.Session.GetInt32("id");
             var b = HttpContext.Session.GetString("email");
-            //var c = HttpContext.Session.GetInt32("employee_id");
-            if (a != null && b != null/* && c != null*/)
+            var c = HttpContext.Session.GetInt32("employee_id");
+            var d = HttpContext.Session.GetInt32("role_id");
+            if (a != null && b != null && c != null && d != null)
             {
                 return View();
             }
